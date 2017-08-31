@@ -1,0 +1,59 @@
+
+<ion-header-bar align-title="center">
+  <button class="button icon-right ion-heart button-assertive favorite"></button>
+  <h1 class="title name">欢迎光临爱尚生活小超市</h1>
+</ion-header-bar>
+<ion-content
+    class="has-header has-footer">
+  <!-- 搜索框-->
+  <div class="list list-inset">
+    <div class="item item-input">
+      <input
+          ng-model="inputTxt.kw"
+          placeholder="请输入商品的名字"
+          type="text"/>
+      <i class="icon ion-search"></i>
+    </div>
+  </div>
+  <!-- 缩略图列表-->
+  <div class="list list-inset">
+    <div
+        ng-repeat="dish in dishList"
+        ui-sref="kflDetail({did:dish.did})"
+        class="item item-thumbnail-left">
+      <img class="img-responsive"
+           ng-src="img/{{dish.img_sm}}" alt=""/>
+      <h2>{{dish.name}}</h2>
+      <p>{{dish.material}}</p>
+      <p>{{dish.price | currency:'￥'}}</p>
+    </div>
+    <!--
+    immediate-check
+    -->
+    <!-- 移动端ionic框架 ionInfiniteScroll-->
+    <ion-infinite-scroll
+        ng-if="hasMore"
+        on-infinite="loadMore()">
+
+    </ion-infinite-scroll>
+
+    <!-- 加载更多的按钮-->
+  <!--  <button
+        ng-show="hasMore"
+        ng-click="loadMore()"
+        class="button
+    button-balanced button-block">
+      加载更多
+    </button>-->
+
+    <div class="card" ng-hide="hasMore">
+      <div class="item  noMore">
+        没有更多数据可以加载了
+      </div>
+    </div>
+
+  </div>
+</ion-content>
+
+<div ng-include=
+         "'tpl/include/footer.html'"></div>
